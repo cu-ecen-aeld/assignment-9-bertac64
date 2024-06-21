@@ -1,2 +1,2 @@
 
-source "BR2_EXTERNAL/base_external/package/aesd-assignments/Config.in"
+source "/home/berta/Documenti/assignment-4-bertac64/base_external/package/aesd-assignments/Config.in"
