@@ -1,5 +1,5 @@
 
-config BR2_PACKAGE_AESD_ASSIGNMENTS
+config BR2_PACKAGE_LDD
 	bool "ldd"
 	help
 	  Includes the assignments 7 files in the kernel image.
