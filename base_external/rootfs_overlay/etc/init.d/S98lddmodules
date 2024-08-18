@@ -1,0 +1,31 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          lddmodules
+# Required-Start:    
+# Required-Stop:     
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Load custom kernel modules at boot
+### END INIT INFO
+
+case "$1" in
+  start)
+    echo "Loading kernel modules..."
+    # Add commands to load your kernel modules here
+    /etc/misc_modules/module_load
+    /etc/scull/scull_load
+    ;;
+  stop)
+    echo "Unloading kernel modules..."
+    # Add commands to unload your kernel modules here
+    /etc/misc_modules/module_unload
+    /etc/scull/scull_unload
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
