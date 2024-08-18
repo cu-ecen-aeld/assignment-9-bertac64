@@ -1,6 +1,6 @@
 
-config BR2_PACKAGE_LDD
-	bool "ldd"
+config BR2_PACKAGE_LDD3
+	bool "ldd3"
 	help
 	  Includes the assignments 7 files in the kernel image.
 	  Used to understand buildroot external trees and package builds.
