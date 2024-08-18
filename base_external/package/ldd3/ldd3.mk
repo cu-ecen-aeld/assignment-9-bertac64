@@ -8,9 +8,9 @@ LDD3_VERSION = v1.0.0
 # Note: Be sure to reference the *ssh* repository URL here (not https) to work properly
 # with ssh keys and the automated build/test system.
 # Your site should start with git@github.com:
-LDD3_SITE = git@github.com:cu-ecen-aeld/assignments-7-bertac64
-#LDD_SITE_METHOD = git
-#LDD_GIT_SUBMODULES = YES
+LDD3_SITE = git@github.com:cu-ecen-aeld/assignment-7-bertac64
+LDD_SITE_METHOD = git
+LDD_GIT_SUBMODULES = YES
 LDD_MODULE_SUBDIRS = misc-modules scull
 define LDD_BUILD_CMDS
 	for dir in $(LDD_MODULE_SUBDIRS); do \
