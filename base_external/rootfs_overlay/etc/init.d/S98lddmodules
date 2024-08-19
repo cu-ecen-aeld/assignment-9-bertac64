@@ -1,31 +1,37 @@
 #!/bin/sh
 
-### BEGIN INIT INFO
-# Provides:          lddmodules
-# Required-Start:    
-# Required-Stop:     
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: Load custom kernel modules at boot
-### END INIT INFO
+start() {
+	echo "Starting init scripts for loading kernel modules..."
+    # Add commands to load your kernel modules here
+    cd //lib/modules/'uname -r'/extra
+    modprobe hello
+    #module_load hello
+    start-stop-daemon -S --exec /usr/bin/module_load -- faulty
+    [ $? = 0 ] && echo "OK 1" || echo "FAIL -1"
+    start-stop-daemon -S --exec /usr/bin/scull_load
+    [ $? = 0 ] && echo "OK 2" || echo "FAIL -2"
+}
+
+stop() {
+	echo "Starting init scripts for unloading kernel modules..."
+    # Add commands to unload your kernel modules here
+    cd //lib/modules/'uname -r'/extra
+    rmmod hello
+    #module_unload hello
+    module_unload faulty
+    scull_unload
+}
 
 case "$1" in
   start)
-    echo "Loading kernel modules..."
-    # Add commands to load your kernel modules here
-    /etc/misc_modules/module_load
-    /etc/scull/scull_load
+    start
     ;;
   stop)
-    echo "Unloading kernel modules..."
-    # Add commands to unload your kernel modules here
-    /etc/misc_modules/module_unload
-    /etc/scull/scull_unload
+    stop
     ;;
   *)
     echo "Usage: $0 {start|stop}"
-    exit 1
-    ;;
+  exit 1
 esac
 
 exit 0

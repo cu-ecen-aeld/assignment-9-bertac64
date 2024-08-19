@@ -11,25 +11,16 @@ LDD_VERSION = v1.0.0
 LDD_SITE = git@github.com:cu-ecen-aeld/assignment-7-bertac64
 LDD_SITE_METHOD = git
 LDD_GIT_SUBMODULES = YES
-#LDD_MODULE_SUBDIRS = misc-modules scull
 
-define LDD_BUILD_CMDS
-#	for dir in $(LDD_MODULE_SUBDIRS); do \
-#		$(MAKE) -C $$dir $(TARGET_CONFIGURE_OPTS); \
-#	done
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/misc-modules modules
-	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/scull modules
-endef
+LDD_MODULE_SUBDIRS = misc-modules scull
+LDD_MODULE_MAKE_OPTS = KVERSION=$(LINUX_VERSION_PROBED)
 
 define LDD_INSTALL_TARGET_CMDS
-#	for dir in $(LDD_MODULE_SUBDIRS); do \
-#		$(MAKE) -C $$dir install DESTDIR=$(TARGET_DIR); \
-#	done
-	$(INSTALL) -d 0755 $(@D)/misc-modules/ $(TARGET_DIR)/etc/misc-modules/
-	$(INSTALL) -m 0755 $(@D)/misc-modules/* $(TARGET_DIR)/etc/misc-modules/
-	$(INSTALL) -d 0755 $(@D)/scull/ $(TARGET_DIR)/etc/scull/
-	$(INSTALL) -m 0755 $(@D)/scull/* $(TARGET_DIR)/etc/scull/
-#	$(INSTALL) -m 0755 $(@D)/base_external/rootfs_overlay/etc/init.d/S98lddmodules $(TARGET_DIR)/etc/init.d/S98lddmodules
+	$(INSTALL) -D -m 0755 $(@D)/misc-modules/module_load $(TARGET_DIR)/usr/bin/
+	$(INSTALL) -D -m 0755 $(@D)/misc-modules/module_unload $(TARGET_DIR)/usr/bin/
+	$(INSTALL) -D -m 0755 $(@D)/scull/scull_load $(TARGET_DIR)/usr/bin/
+	$(INSTALL) -D -m 0755 $(@D)/scull/scull_unload $(TARGET_DIR)/usr/bin/
 endef
 
+$(eval $(kernel-module))
 $(eval $(generic-package))
