@@ -3,7 +3,7 @@
 start() {
 	echo "Starting init scripts for loading kernel modules..."
     # Add commands to load your kernel modules here
-    cd //lib/modules/'uname -r'/extra
+    cd /lib/modules/`uname -r`/extra
     modprobe hello
     #module_load hello
     start-stop-daemon -S --exec /usr/bin/module_load -- faulty
@@ -15,7 +15,7 @@ start() {
 stop() {
 	echo "Starting init scripts for unloading kernel modules..."
     # Add commands to unload your kernel modules here
-    cd //lib/modules/'uname -r'/extra
+    cd /lib/modules/`uname -r`/extra
     rmmod hello
     #module_unload hello
     module_unload faulty
